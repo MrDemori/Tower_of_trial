@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
     [SerializeField] private float moveSpeed = 1f;
@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.1f;
 
+    private bool doubleJump = true;
     private bool isGrounded;
 
     void Start()
@@ -25,6 +26,22 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            doubleJump = true;
         }
+        else
+        {
+            if (Input.GetButtonDown("Jump") && doubleJump)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                doubleJump = false;
+            }
+        }
+        
     }
+
+    void OnTriggerEnter2D()
+    {
+        doubleJump = true;
+    }
+
 }
