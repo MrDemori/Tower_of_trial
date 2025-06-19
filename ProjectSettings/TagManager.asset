@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - tile
+  - Checkpoint
+  - Death
+  - Refile
   layers:
   - Default
   - TransparentFX
